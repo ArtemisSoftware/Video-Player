@@ -22,10 +22,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="340dp"
         android:text="Streaming Video"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+
+    <Button
+        android:id="@+id/btn_stream_surface_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Streaming Surface Video"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_stream_player"
+        app:layout_constraintVertical_bias="0.085" />
 </androidx.constraintlayout.widget.ConstraintLayout>
