@@ -14,6 +14,7 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements Surfa
     private SurfaceHolder vidHolder;
     private SurfaceView vidSurface;
     String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+    String URL= "https://www.youtube.com/watch?v=QnOcXQL2wDA&t=18s";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
