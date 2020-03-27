@@ -3,11 +3,15 @@ package com.artemissoftware.videoplayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.VideoView;
 
 public class StreamingActivity extends AppCompatActivity {
@@ -15,6 +19,7 @@ public class StreamingActivity extends AppCompatActivity {
     private static final String TAG = "StreamingActivity";
 
     ProgressDialog pDialog;
+
     VideoView videoview;
     String vid_url ="https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
 
@@ -42,8 +47,6 @@ public class StreamingActivity extends AppCompatActivity {
         }
         videoview.requestFocus();
 
-
-
     }
 
     private void init(){
@@ -51,6 +54,7 @@ public class StreamingActivity extends AppCompatActivity {
         videoview = (VideoView) findViewById(R.id.videoView);
         videoview.setOnPreparedListener(mediaPlayer_OnPreparedListener);
         videoview.setOnCompletionListener(mediaPlayer_OnCompletionListener);
+
 
         pDialog = new ProgressDialog(this);
         pDialog.setTitle("Video Stream");

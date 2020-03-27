@@ -2,17 +2,26 @@ package com.artemissoftware.videoplayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 public class StreamingSurfaceActivity extends AppCompatActivity implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener {
 
     private MediaPlayer mediaPlayer;
     private SurfaceHolder vidHolder;
     private SurfaceView vidSurface;
+
+
+    private ProgressBar pg_bar_download;
+    private Button btn_download;
+
     String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
     String URL= "https://www.youtube.com/watch?v=QnOcXQL2wDA&t=18s";
 
@@ -24,6 +33,10 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements Surfa
         vidSurface = (SurfaceView) findViewById(R.id.surfView);
         vidHolder = vidSurface.getHolder();
         vidHolder.addCallback(this);
+
+
+        btn_download.setOnClickListener(btn_download_OnClickListener);
+        pg_bar_download  = (ProgressBar) findViewById(R.id.pg_bar_download);
     }
 
     @Override
@@ -56,4 +69,16 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements Surfa
     public void surfaceDestroyed(SurfaceHolder holder) {
         // TODO Auto-generated method stub
     }
+
+
+
+    Button.OnClickListener btn_download_OnClickListener = new Button.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+
+            pg_bar_download.setVisibility(View.VISIBLE);
+            new DownloadVideoTask(getApplicationContext(), pg_bar_download).execute();
+        }
+    };
 }
