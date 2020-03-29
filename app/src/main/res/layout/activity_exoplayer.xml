@@ -7,4 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".ExoplayerActivity">
 
+    <com.artemissoftware.videoplayer.util.VideoPlayerRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view"
+        android:orientation="vertical">
+
+    </com.artemissoftware.videoplayer.util.VideoPlayerRecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
