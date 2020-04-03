@@ -10,7 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
 
-    private Button btn_stream_player, btn_stream_surface_player;
+    private Button btn_stream_player, btn_stream_surface_player, btn_exo_player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
         btn_stream_surface_player = (Button) findViewById(R.id.btn_stream_surface_player);
         btn_stream_surface_player.setOnClickListener(btn_stream_surface_player_OnClickListener);
+
+        btn_exo_player = (Button) findViewById(R.id.btn_exo_player);
+        btn_exo_player.setOnClickListener(btn_exo_player_OnClickListener);
     }
 
 
@@ -39,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), StreamingSurfaceActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    Button.OnClickListener btn_exo_player_OnClickListener = new Button.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(), ExoplayerActivity.class);
             startActivity(intent);
         }
     };

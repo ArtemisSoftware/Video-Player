@@ -22,8 +22,11 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements Surfa
     private ProgressBar pg_bar_download;
     private Button btn_download;
 
-    String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
-    String URL= "https://www.youtube.com/watch?v=QnOcXQL2wDA&t=18s";
+    //String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+    private String vidAddress = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+    //String vidAddress= "https://www.youtube.com/watch?v=QnOcXQL2wDA&t=18s";
+    //String vidAddress= "https://www.dailymotion.com/video/x7t1ezo";
+    //String vidAddress= "https://vimeo.com/76979871";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements Surfa
         vidHolder.addCallback(this);
 
 
-        btn_download.setOnClickListener(btn_download_OnClickListener);
+        ((Button) findViewById(R.id.btn_download)).setOnClickListener(btn_download_OnClickListener);
         pg_bar_download  = (ProgressBar) findViewById(R.id.pg_bar_download);
     }
 
@@ -78,7 +81,7 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements Surfa
         public void onClick(View v) {
 
             pg_bar_download.setVisibility(View.VISIBLE);
-            new DownloadVideoTask(getApplicationContext(), pg_bar_download).execute();
+            new DownloadVideoTask(getApplicationContext(), pg_bar_download).execute(vidAddress);
         }
     };
 }
