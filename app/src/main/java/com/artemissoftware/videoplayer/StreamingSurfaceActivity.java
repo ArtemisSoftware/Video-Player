@@ -93,7 +93,6 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
                 }
             });
 
-
         }
         catch(Exception e){
             e.printStackTrace();
@@ -104,7 +103,7 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
         pg_bar_download.setVisibility(View.VISIBLE);
         pg_bar_download.setMax(100);
-        pg_bar_download.setProgress(percent);
+        pg_bar_download.setSecondaryProgress(percent);
     }
 
     @Override
@@ -207,9 +206,13 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
 
 
 
-    public void start() { mediaPlayer.start(); }
+    public void start() {
+        mediaPlayer.start();
+    }
 
-    public void pause() { mediaPlayer.pause(); }
+    public void pause() {
+        mediaPlayer.pause();
+    }
 
     public int getDuration() { return mediaPlayer.getDuration(); }
 
@@ -248,9 +251,9 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             case R.id.option_download:
 
-                mediaPlayer.stop();
+                mediaPlayer.pause();
                 pg_bar_download.setVisibility(View.VISIBLE);
-                //new DownloadVideoTask(getApplicationContext(), pg_bar_download).execute(vidAddress);
+                new DownloadVideoTask(getApplicationContext(), pg_bar_download).execute(vidAddress);
                 return true;
 
             default:
