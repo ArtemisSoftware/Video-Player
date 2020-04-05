@@ -14,6 +14,8 @@ import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.VideoView;
 
+import com.artemissoftware.videoplayer.constants.VideoUrl;
+
 public class StreamingActivity extends AppCompatActivity {
 
     private static final String TAG = "StreamingActivity";
@@ -21,7 +23,6 @@ public class StreamingActivity extends AppCompatActivity {
     ProgressDialog pDialog;
 
     VideoView videoview;
-    String vid_url ="https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
 
 
     @Override
@@ -37,7 +38,7 @@ public class StreamingActivity extends AppCompatActivity {
             MediaController mediacontroller = new MediaController(this);
             mediacontroller.setAnchorView(videoview);
 
-            Uri video = Uri.parse(vid_url);
+            Uri video = Uri.parse(VideoUrl.VIDEO_1);
             videoview.setMediaController(mediacontroller);
             videoview.setVideoURI(video);
         }
@@ -80,5 +81,7 @@ public class StreamingActivity extends AppCompatActivity {
             finish();
         }
     };
+
+
 
 }
