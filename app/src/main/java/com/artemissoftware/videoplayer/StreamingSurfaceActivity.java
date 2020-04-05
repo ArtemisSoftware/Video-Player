@@ -8,6 +8,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -53,7 +56,6 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
 
         mediaController = new MediaController(this);
 
-        ((Button) findViewById(R.id.btn_download)).setOnClickListener(btn_download_OnClickListener);
         pg_bar_download  = (ProgressBar) findViewById(R.id.pg_bar_download);
     }
 
@@ -108,7 +110,6 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
     @Override
     public void onCompletion(MediaPlayer arg0) {
         pg_bar_download.setVisibility(View.INVISIBLE);
-        ((Button) findViewById(R.id.btn_download)).setEnabled(true);
     }
 
     @Override
@@ -154,17 +155,6 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
     }
 
 
-
-    Button.OnClickListener btn_download_OnClickListener = new Button.OnClickListener(){
-
-        @Override
-        public void onClick(View v) {
-
-            mediaPlayer.stop();
-            pg_bar_download.setVisibility(View.VISIBLE);
-            //new DownloadVideoTask(getApplicationContext(), pg_bar_download).execute(vidAddress);
-        }
-    };
 
 
     @Override
@@ -243,11 +233,11 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
         return 0;
     }
 
-/*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.game_menu, menu);
+        inflater.inflate(R.menu.video_menu, menu);
         return true;
     }
 
@@ -256,15 +246,16 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.new_game:
-                newGame();
+            case R.id.option_download:
+
+                mediaPlayer.stop();
+                pg_bar_download.setVisibility(View.VISIBLE);
+                //new DownloadVideoTask(getApplicationContext(), pg_bar_download).execute(vidAddress);
                 return true;
-            case R.id.help:
-                showHelp();
-                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-    */
+
 }
