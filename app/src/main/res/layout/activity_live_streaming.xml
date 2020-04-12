@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- The camera preview display
+    <!-- The camera preview display -->
     <com.wowza.gocoder.sdk.api.devices.WOWZCameraView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +16,7 @@
         wowza:scaleMode="fill"
         wowza:defaultCamera="back"
         wowza:frameSizePreset="frameSize1280x720"/>
--->
+
     <!-- The broadcast button -->
     <Button
         android:layout_width="wrap_content"

@@ -2,10 +2,40 @@ package com.artemissoftware.videoplayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.View;
 
+import com.wowza.gocoder.sdk.api.WowzaGoCoder;
+import com.wowza.gocoder.sdk.api.broadcast.WOWZBroadcast;
+import com.wowza.gocoder.sdk.api.broadcast.WOWZBroadcastConfig;
+import com.wowza.gocoder.sdk.api.devices.WOWZAudioDevice;
+import com.wowza.gocoder.sdk.api.devices.WOWZCameraView;
+
 public class LiveStreamingActivity extends AppCompatActivity {
+
+    // The top-level GoCoder API interface
+    private WowzaGoCoder goCoder;
+
+    // The GoCoder SDK camera view
+    private WOWZCameraView goCoderCameraView;
+
+    // The GoCoder SDK audio device
+    private WOWZAudioDevice goCoderAudioDevice;
+
+    // The GoCoder SDK broadcaster
+    private WOWZBroadcast goCoderBroadcaster;
+
+    // The broadcast configuration settings
+    private WOWZBroadcastConfig goCoderBroadcastConfig;
+
+    // Properties needed for Android 6+ permissions handling
+    private static final int PERMISSIONS_REQUEST_CODE = 0x1;
+    private boolean mPermissionsGranted = true;
+    private String[] mRequiredPermissions = new String[] {
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
