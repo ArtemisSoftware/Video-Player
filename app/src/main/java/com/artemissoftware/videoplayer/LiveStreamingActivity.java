@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.wowza.gocoder.sdk.api.WowzaGoCoder;
 import com.wowza.gocoder.sdk.api.broadcast.WOWZBroadcast;
 import com.wowza.gocoder.sdk.api.broadcast.WOWZBroadcastConfig;
 import com.wowza.gocoder.sdk.api.devices.WOWZAudioDevice;
 import com.wowza.gocoder.sdk.api.devices.WOWZCameraView;
+import com.wowza.gocoder.sdk.api.errors.WOWZError;
 
 public class LiveStreamingActivity extends AppCompatActivity {
 
@@ -41,6 +43,19 @@ public class LiveStreamingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_streaming);
+
+        // Initialize the GoCoder SDK
+        goCoder = WowzaGoCoder.init(getApplicationContext(), "EDEV4-4HmNj-6Ma6n-7zUY4-VNpHX-GWjjB-nZNTpn4wjAm");
+
+        if (goCoder == null) {
+            // If initialization failed, retrieve the last error and display it
+            WOWZError goCoderInitError = WowzaGoCoder.getLastError();
+            Toast.makeText(this,
+                    "GoCoder SDK error: " + goCoderInitError.getErrorDescription(),
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
     }
 
     @Override
