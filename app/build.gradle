@@ -23,6 +23,12 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -43,4 +49,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
+
+    // Include the GoCoder SDK library dependency declaration
+    implementation 'com.wowza.gocoder.sdk.android:com.wowza.gocoder.sdk:2.0.0@aar'
 }
