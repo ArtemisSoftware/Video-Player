@@ -60,6 +60,9 @@ public class LiveStreamingActivity extends AppCompatActivity {
             return;
         }
 
+        // Associate the WOWZCameraView defined in the U/I layout with the corresponding class member
+        goCoderCameraView = (WOWZCameraView) findViewById(R.id.camera_preview);
+
     }
 
     @Override
@@ -94,6 +97,14 @@ public class LiveStreamingActivity extends AppCompatActivity {
         } else
             mPermissionsGranted = true;
 
+
+        // Start the camera preview display
+        if (mPermissionsGranted && goCoderCameraView != null) {
+            if (goCoderCameraView.isPreviewPaused())
+                goCoderCameraView.onResume();
+            else
+                goCoderCameraView.startPreview();
+        }
     }
 
     //
