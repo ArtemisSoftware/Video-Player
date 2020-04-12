@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.wowza.gocoder.sdk.api.WowzaGoCoder;
@@ -24,8 +25,9 @@ import com.wowza.gocoder.sdk.api.errors.WOWZStreamingError;
 import com.wowza.gocoder.sdk.api.status.WOWZBroadcastStatus;
 import com.wowza.gocoder.sdk.api.status.WOWZBroadcastStatusCallback;
 import com.wowza.gocoder.sdk.support.status.WOWZState;
+import com.wowza.gocoder.sdk.support.status.WOWZStatusCallback;
 
-public class LiveStreamingActivity extends AppCompatActivity implements WOWZBroadcastStatusCallback{
+public class LiveStreamingActivity extends AppCompatActivity implements WOWZBroadcastStatusCallback, View.OnClickListener{
 
     // The top-level GoCoder API interface
     private WowzaGoCoder goCoder;
@@ -72,6 +74,10 @@ public class LiveStreamingActivity extends AppCompatActivity implements WOWZBroa
 
         // Associate the WOWZCameraView defined in the U/I layout with the corresponding class member
         goCoderCameraView = (WOWZCameraView) findViewById(R.id.camera_preview);
+
+        // Associate the onClick() method as the callback for the broadcast button's click event
+        Button broadcastButton = (Button) findViewById(R.id.broadcast_button);
+        broadcastButton.setOnClickListener(this);
 
     }
 
@@ -218,6 +224,29 @@ public class LiveStreamingActivity extends AppCompatActivity implements WOWZBroa
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    //
+// The callback invoked when the broadcast button is tapped
+//
+    @Override
+    public void onClick(View view) {
+        // return if the user hasn't granted the app the necessary permissions
+        if (!mPermissionsGranted) return;
+
+        // Ensure the minimum set of configuration settings have been specified necessary to
+        // initiate a broadcast streaming session
+        WOWZStreamingError configValidationError = goCoderBroadcastConfig.validateForBroadcast();
+
+        if (configValidationError != null) {
+            Toast.makeText(this, configValidationError.getErrorDescription(), Toast.LENGTH_LONG).show();
+        } else if (goCoderBroadcaster.getStatus().isBroadcasting()) {
+            // Stop the broadcast that is currently broadcasting
+            goCoderBroadcaster.endBroadcast((WOWZStatusCallback) this);
+        } else {
+            // Start streaming
+            goCoderBroadcaster.startBroadcast(goCoderBroadcastConfig, this);
+        }
     }
 
 }
