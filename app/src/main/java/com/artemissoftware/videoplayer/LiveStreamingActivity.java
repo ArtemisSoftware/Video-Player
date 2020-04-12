@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.wowza.gocoder.sdk.api.WowzaGoCoder;
 import com.wowza.gocoder.sdk.api.broadcast.WOWZBroadcast;
 import com.wowza.gocoder.sdk.api.broadcast.WOWZBroadcastConfig;
+import com.wowza.gocoder.sdk.api.configuration.WOWZMediaConfig;
 import com.wowza.gocoder.sdk.api.devices.WOWZAudioDevice;
 import com.wowza.gocoder.sdk.api.devices.WOWZCameraView;
 import com.wowza.gocoder.sdk.api.errors.WOWZError;
@@ -60,6 +61,9 @@ public class LiveStreamingActivity extends AppCompatActivity {
             return;
         }
 
+        // Create an audio device instance for capturing and broadcasting audio
+        goCoderAudioDevice = new WOWZAudioDevice();
+
         // Associate the WOWZCameraView defined in the U/I layout with the corresponding class member
         goCoderCameraView = (WOWZCameraView) findViewById(R.id.camera_preview);
 
@@ -105,6 +109,27 @@ public class LiveStreamingActivity extends AppCompatActivity {
             else
                 goCoderCameraView.startPreview();
         }
+
+
+        // Create a broadcaster instance
+        goCoderBroadcaster = new WOWZBroadcast();
+
+// Create a configuration instance for the broadcaster
+        goCoderBroadcastConfig = new WOWZBroadcastConfig(WOWZMediaConfig.FRAME_SIZE_1920x1080);
+
+// Set the connection properties for the target Wowza Streaming Engine server or Wowza Streaming Cloud live stream
+        goCoderBroadcastConfig.setHostAddress("live.someserver.net");
+        goCoderBroadcastConfig.setPortNumber(1935);
+        goCoderBroadcastConfig.setApplicationName("live");
+        goCoderBroadcastConfig.setStreamName("myStream");
+        goCoderBroadcastConfig.setApplicationName("my_applicationName");
+        goCoderBroadcastConfig.setStreamName("my_streamName");
+
+// Designate the camera preview as the video source
+        goCoderBroadcastConfig.setVideoBroadcaster(goCoderCameraView);
+
+// Designate the audio device as the audio broadcaster
+        goCoderBroadcastConfig.setAudioBroadcaster(goCoderAudioDevice);
     }
 
     //
