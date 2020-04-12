@@ -1,8 +1,12 @@
 package com.artemissoftware.videoplayer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -71,5 +75,54 @@ public class LiveStreamingActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
+
+    //
+// Called when an activity is brought to the foreground
+//
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // If running on Android 6 (Marshmallow) and later, check to see if the necessary permissions
+        // have been granted
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mPermissionsGranted = hasPermissions(this, mRequiredPermissions);
+            if (!mPermissionsGranted)
+                ActivityCompat.requestPermissions(this, mRequiredPermissions, PERMISSIONS_REQUEST_CODE);
+        } else
+            mPermissionsGranted = true;
+
+    }
+
+    //
+// Callback invoked in response to a call to ActivityCompat.requestPermissions() to interpret
+// the results of the permissions request
+//
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        mPermissionsGranted = true;
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_CODE: {
+                // Check the result of each permission granted
+                for(int grantResult : grantResults) {
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        mPermissionsGranted = false;
+                    }
+                }
+            }
+        }
+    }
+
+    //
+// Utility method to check the status of a permissions request for an array of permission identifiers
+//
+    private static boolean hasPermissions(Context context, String[] permissions) {
+        for(String permission : permissions)
+            if (context.checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED)
+                return false;
+
+        return true;
     }
 }
