@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,8 +20,12 @@ import com.wowza.gocoder.sdk.api.configuration.WOWZMediaConfig;
 import com.wowza.gocoder.sdk.api.devices.WOWZAudioDevice;
 import com.wowza.gocoder.sdk.api.devices.WOWZCameraView;
 import com.wowza.gocoder.sdk.api.errors.WOWZError;
+import com.wowza.gocoder.sdk.api.errors.WOWZStreamingError;
+import com.wowza.gocoder.sdk.api.status.WOWZBroadcastStatus;
+import com.wowza.gocoder.sdk.api.status.WOWZBroadcastStatusCallback;
+import com.wowza.gocoder.sdk.support.status.WOWZState;
 
-public class LiveStreamingActivity extends AppCompatActivity {
+public class LiveStreamingActivity extends AppCompatActivity implements WOWZBroadcastStatusCallback{
 
     // The top-level GoCoder API interface
     private WowzaGoCoder goCoder;
@@ -161,4 +167,57 @@ public class LiveStreamingActivity extends AppCompatActivity {
 
         return true;
     }
+
+
+    //
+// The callback invoked upon changes to the state of the broadcast
+//
+    @Override
+    public void onWZStatus(final WOWZBroadcastStatus goCoderStatus) {
+        // A successful status transition has been reported by the GoCoder SDK
+        final StringBuffer statusMessage = new StringBuffer("Broadcast status: ");
+
+        switch (goCoderStatus.getState()) {
+            case READY:
+                statusMessage.append("Ready to begin broadcasting");
+                break;
+
+            case BROADCASTING:
+                statusMessage.append("Broadcast is active");
+                break;
+
+            case IDLE:
+                statusMessage.append("The broadcast is stopped");
+                break;
+
+            default:
+                return;
+        }
+
+        // Display the status message using the U/I thread
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(LiveStreamingActivity.this, statusMessage, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    //
+// The callback invoked when an error occurs during a broadcast
+//
+    @Override
+    public void onWZError(final WOWZBroadcastStatus goCoderStatus) {
+        // If an error is reported by the GoCoder SDK, display a message
+        // containing the error details using the U/I thread
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(LiveStreamingActivity.this,
+                        "Streaming error: " + goCoderStatus.getLastError().getErrorDescription(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 }
