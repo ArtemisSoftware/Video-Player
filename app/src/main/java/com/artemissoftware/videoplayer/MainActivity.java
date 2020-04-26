@@ -10,7 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
 
-    private Button btn_stream_player, btn_stream_surface_player, btn_exo_player;
+    private Button btn_stream_player, btn_stream_surface_player, btn_exo_player, btn_wowza_streaming;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
 
         btn_exo_player = (Button) findViewById(R.id.btn_exo_player);
         btn_exo_player.setOnClickListener(btn_exo_player_OnClickListener);
+
+        btn_exo_player = (Button) findViewById(R.id.btn_exo_player);
+        btn_exo_player.setOnClickListener(btn_exo_player_OnClickListener);
+
+        btn_wowza_streaming = (Button) findViewById(R.id.btn_wowza_streaming);
+        btn_wowza_streaming.setOnClickListener(btn_wowza_streaming_OnClickListener);
     }
 
 
@@ -51,6 +57,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), ExoplayerActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    Button.OnClickListener btn_wowza_streaming_OnClickListener = new Button.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(), LiveStreamingActivity.class);
             startActivity(intent);
         }
     };

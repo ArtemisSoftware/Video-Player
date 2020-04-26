@@ -130,12 +130,13 @@ public class LiveStreamingActivity extends AppCompatActivity implements WOWZBroa
         goCoderBroadcastConfig = new WOWZBroadcastConfig(WOWZMediaConfig.FRAME_SIZE_1920x1080);
 
 // Set the connection properties for the target Wowza Streaming Engine server or Wowza Streaming Cloud live stream
-        goCoderBroadcastConfig.setHostAddress("live.someserver.net");
+        goCoderBroadcastConfig.setHostAddress("41c41c.entrypoint.cloud.wowza.com");
         goCoderBroadcastConfig.setPortNumber(1935);
-        goCoderBroadcastConfig.setApplicationName("live");
-        goCoderBroadcastConfig.setStreamName("myStream");
-        goCoderBroadcastConfig.setApplicationName("my_applicationName");
-        goCoderBroadcastConfig.setStreamName("my_streamName");
+        goCoderBroadcastConfig.setApplicationName("app-c6dd");
+        goCoderBroadcastConfig.setStreamName("2e6799ff");
+        goCoderBroadcastConfig.setUsername("client53102");
+        goCoderBroadcastConfig.setPassword("39ea5bcb");
+
 
 // Designate the camera preview as the video source
         goCoderBroadcastConfig.setVideoBroadcaster(goCoderCameraView);
