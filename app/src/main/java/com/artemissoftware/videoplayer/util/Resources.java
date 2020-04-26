@@ -4,6 +4,11 @@ import com.artemissoftware.videoplayer.models.MediaObject;
 
 public class Resources {
 
+    public final static String VIDEO_1 ="https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+    public final static String VIDEO_2 ="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
+
+
     public static final MediaObject[] MEDIA_OBJECTS = {
             new MediaObject("Sending Data to a New Activity with Intent Extras",
                     "https://s3.ca-central-1.amazonaws.com/codingwithmitch/media/VideoPlayerRecyclerView/Sending+Data+to+a+New+Activity+with+Intent+Extras.mp4",

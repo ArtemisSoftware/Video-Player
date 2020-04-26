@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 
-import com.artemissoftware.videoplayer.constants.VideoUrl;
+import com.artemissoftware.videoplayer.util.Resources;
 
 public class StreamingSurfaceActivity extends AppCompatActivity implements
         MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnVideoSizeChangedListener, MediaPlayer.OnPreparedListener,
@@ -33,7 +33,7 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
     private SurfaceView vidSurface;
 
     private ProgressBar pg_bar_download;
-    private String vidAddress = VideoUrl.VIDEO_2;
+    private String vidAddress = Resources.VIDEO_2;
 
 
     private int mVideoWidth;

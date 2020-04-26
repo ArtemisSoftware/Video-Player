@@ -14,7 +14,7 @@ import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.VideoView;
 
-import com.artemissoftware.videoplayer.constants.VideoUrl;
+import com.artemissoftware.videoplayer.util.Resources;
 
 public class StreamingActivity extends AppCompatActivity {
 
@@ -38,7 +38,7 @@ public class StreamingActivity extends AppCompatActivity {
             MediaController mediacontroller = new MediaController(this);
             mediacontroller.setAnchorView(videoview);
 
-            Uri video = Uri.parse(VideoUrl.VIDEO_1);
+            Uri video = Uri.parse(Resources.VIDEO_1);
             videoview.setMediaController(mediacontroller);
             videoview.setVideoURI(video);
         }
