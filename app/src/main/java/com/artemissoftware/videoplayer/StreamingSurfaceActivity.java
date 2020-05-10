@@ -288,7 +288,7 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
                     public void onPermissionDenied(PermissionDeniedResponse response) {
                         // check for permanent denial of permission
                         if (response.isPermanentlyDenied()) {
-                            // navigate user to app settings
+                            showSettingsDialog();
                         }
                     }
 

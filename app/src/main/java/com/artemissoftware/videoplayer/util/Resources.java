@@ -4,6 +4,8 @@ import com.artemissoftware.videoplayer.models.MediaObject;
 
 public class Resources {
 
+    public final static String VIDEO_DOWNLOAD_DIRECTORY = "videoplayerapp";
+
     public final static String VIDEO_1 ="https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
     public final static String VIDEO_2 ="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
