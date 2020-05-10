@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
@@ -131,6 +132,12 @@ public class StreamingSurfaceActivity extends AppCompatActivity implements
             return;
         }
 
+        /*
+        ViewGroup.LayoutParams layoutParams = vidSurface.getLayoutParams();
+        layoutParams.height = height + 200;
+        layoutParams.width = width + 200;
+        vidSurface.setLayoutParams(layoutParams);
+        */
         mIsVideoSizeKnown = true;
         mVideoWidth = width;
         mVideoHeight = height;
