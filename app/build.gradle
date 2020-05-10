@@ -52,4 +52,6 @@ dependencies {
 
     // Include the GoCoder SDK library dependency declaration
     implementation 'com.wowza.gocoder.sdk.android:com.wowza.gocoder.sdk:2.0.0@aar'
+
+    implementation 'com.karumi:dexter:6.1.2'
 }
